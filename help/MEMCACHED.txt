@@ -1,0 +1,18 @@
+
+
+C:\ProgrammData\memcached-amd64\memcached.exe  runservice -p 11211
+
+
+Install Memcached Server - Windows
+https://docs.kony.com/konylibrary/konyfabric/kony_fabric_manual_install_guide/Content/Install_Memcached_Server.htm
+
+How to Install Memcached On Windows
+https://www.ubergizmo.com/how-to/install-memcached-windows/
+
+How to Install Memcached on Windows and Linux Servers
+https://orangeable.com/server/memcached-install
+
+In the key, change the ImagePath entry with the following:
+C:/memcached/memcached.exe -d runservice -m 2048
+
+This way you will use 512 MB memory limit for your server

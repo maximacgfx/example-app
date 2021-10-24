@@ -1,0 +1,31 @@
+
+
+
+Определить Глобальный Пространство имен для View blade 
+
+Настройки пагинации вывода базы данных
+Глубокая тема.
+
+https://www.positronx.io/laravel-pagination-example-with-bootstrap-tutorial/
+
+https://laravel.com/docs/8.x/pagination
+
+https://askdev.ru/q/nastraivaemyy-vid-paginacii-v-freymvork-laravel-5-64991/
+
+https://webmai.ru/bulma/laravel-5-bulma-shablon-dlya-paginacii
+
+
+
+Для этого был написан пакет - Yandex Metrika Laravel 5 Package
+Получаем статистические данные, используя API Yandex Metrika
+
+composer require alexusmai/yandex-metrika
+Добавить сервис провайдер в app/config/app.php
+
+Alexusmai\YandexMetrika\YandexMetrikaServiceProvider::class,
+Добавить алиас
+
+'YandexMetrika' => Alexusmai\YandexMetrika\YandexMetrikaFacade::class,
+Публикуем файл настроек
+
+php artisan vendor:publish --provider="Alexusmai\YandexMetrika\YandexMetrikaServiceProvider" --tag="yandex-metrika"
