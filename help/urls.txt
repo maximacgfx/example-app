@@ -28,3 +28,6 @@ https://tokmakov.msk.ru/blog/tags/314/page/2
 
 Лабораторные записки
 https://laboratorynotices.wordpress.com/2021/05/
+
+Шаблоны Laravel
+https://elements.envato.com/ru/web-templates/laravel/properties-responsive
