@@ -1,0 +1,30 @@
+
+В блоге размещены статьи о различных нюансах веб-разработки,
+ реализации идей, некоторых частей приложений и т.д.
+https://si-dev.com/ru/blog/categories/laravel
+
+
+Под капотом: как работают атрибуты модели в Laravel
+https://maxyc.ru/programming/laravel/под-капотом-как-работают-атрибуты-мод/
+
+
+Уроки программирования на Laravel для начинающих и продвинутых.
+https://laravel.demiart.ru/tag/laravel/
+
+Создание сайтов и WEB-приложений. PHP-программирование.Laravel
+https://klisl.com/category/laravel
+
+Tutorials
+Interested in learning more about Laravel?
+This section features tutorials on everything from getting started with Laravel,
+to expert topics, and everything in between.
+https://laravel-news.com/category/tutorials?page=2
+
+
+
+Узелки на память Теги: Laravel
+https://tokmakov.msk.ru/blog/tags/314/page/2    
+
+
+Лабораторные записки
+https://laboratorynotices.wordpress.com/2021/05/
