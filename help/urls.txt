@@ -31,3 +31,6 @@ https://laboratorynotices.wordpress.com/2021/05/
 
 Шаблоны Laravel
 https://elements.envato.com/ru/web-templates/laravel/properties-responsive
+
+Синхронизация конфигурации VSCode
+https://russianblogs.com/article/6653720098/
