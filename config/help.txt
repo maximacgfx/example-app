@@ -1,0 +1,22 @@
+
+
+php.validate.executablePath
+
+set PATH=%PATH%;C:\Users\stateagencykiyanly\AppData\Local\php-7.4.24;C:\Users\stateagencykiyanly\AppData\Local\Composer\vendor\bin;C:\Users\stateagencykiyanly\AppData\Local\Composer;C:\Users\stateagencykiyanly\AppData\Local\sqlite;
+
+composer global require laravel/installer
+composer global require laravel/framework
+composer global require laravel/installer
+composer global require barryvdh/laravel-debugbar
+composer global require barryvdh/laravel-ide-helper
+
+
+composer create-project laravel/laravel example-app
+
+set HTTP_PROXY=127.0.0.1:51329
+set HTTPS_PROXY=127.0.0.1:51329
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database.sqlite
+
+
