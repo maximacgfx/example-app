@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('news.add',['title' => 'Новый материал']);
+        return view('news.parts.add_news',['title' => 'Новый материал']);
     }
 
     /**
@@ -94,7 +94,7 @@ class PostController extends Controller
     {
         $post = News::whereId($id)->firstOrFail();
 
-        return view('news.edit', ['title' => 'Редактирование материала', 'post' => $post]);
+        return view('news.parts.edit_news', ['title' => 'Редактирование материала', 'post' => $post]);
     
               
     }
