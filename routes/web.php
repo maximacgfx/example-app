@@ -58,9 +58,10 @@ Route::namespace('News')->group( function(){
 
 
      Route::group(['middleware' =>'auth'], function() {
-        // Главная страница новостей
-         Route::get('news/edit/{id}', [PostController::class,'edit'])->name('news.edit');
-         Route::post('news/edit/{id:id}', [PostController::class,'update'])->name('news.edit_post');
+        // Редактирование Новостей
+        Route::get('show/news', [PostController::class,'show'])->name('news.show');
+         Route::get('edit/news/{id}', [PostController::class,'edit'])->name('news.edit');
+         Route::post('edit/news/{id:id}', [PostController::class,'update'])->name('news.edit_post');
 
          Route::get('add/news', [PostController::class,'create'])->name('news.add');
          Route::post('add/news', [PostController::class,'store'])->name('news.add_post');
@@ -69,6 +70,9 @@ Route::namespace('News')->group( function(){
 
 
 });
+
+
+Route::get('help/{post}', 'UserController@index')->name('help');
 
 
 // Как сгенерировать pdf в Laravel

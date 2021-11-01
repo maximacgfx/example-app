@@ -79,9 +79,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //
+        $posts = $news::select( 'id','user_id', 'created_at', 'title')
+        // // ->where('published_at', '<=', Carbon::now())
+        // ->orderBy('published_at', 'desc')
+        // // ->paginate(config('blog.posts_per_page'));
+        ->paginate(10);
+        // $posts = $news::all();
+        // dd($posts);
+
+        return view('news.parts.show_news' ,['title' => 'Все посты блога', 'posts' => $posts]);
     }
 
     /**
