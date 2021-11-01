@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\News\NewsController;
-use \App\Http\Controllers\News\EditController;
+use \App\Http\Controllers\News\PostController;
+
 use \App\Http\Controllers\News\AddController;
+
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\User\IndexController;
 use App\Http\Controllers\QrCodeController;
@@ -56,11 +59,11 @@ Route::namespace('News')->group( function(){
 
      Route::group(['middleware' =>'auth'], function() {
         // Главная страница новостей
-         Route::get('news/edit/{id}', [EditController::class,'showPost'])->name('news.edit');
-         Route::post('news/edit/{id:id}', [EditController::class,'edit'])->name('news.edit_post');
+         Route::get('news/edit/{id}', [PostController::class,'edit'])->name('news.edit');
+         Route::post('news/edit/{id:id}', [PostController::class,'update'])->name('news.edit_post');
 
-         Route::get('add/news', [AddController::class,'show'])->name('news.add');
-         Route::post('add/news', [AddController::class,'create'])->name('news.add_post');
+         Route::get('add/news', [PostController::class,'create'])->name('news.add');
+         Route::post('add/news', [PostController::class,'store'])->name('news.add_post');
 
     });
 
