@@ -9,30 +9,7 @@
         <section class="wt-section">
             <div class="container">
                 <div class="row justify-content-between">
-                    <div class="col-lg-8">
-                            <div class="">
-                                <h2>{{ $title}}</h2>
-                            </div>
-                            @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                            @if (session('message'))
-                                <div class="alert alert-success">
-                                    {{ session('message') }}
-                                </div>
-                            @endif
-                            @yield('crud-forms')       
-                    </div>
-                    <div class="col-lg-4">
-                        @include('news.sidebar')
-                        @include('template.widgets.latest-post')
-                    </div>
+                   @yield('crud-forms')
                 </div>
             </div>
         </section>

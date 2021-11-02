@@ -46,7 +46,7 @@ Auth::routes();
 
 Route::namespace('News')->group( function(){
     // Главная страница новостей
-        Route::get('news', [NewsController::class,'index'])->name('news');
+        Route::get('news', [NewsController::class,'newsPage'])->name('news');
     // Страница Тегов Новостей
         Route::get('news/tag/{tag:slug}', [NewsController::class,'tags'])->name('news.tags');
     // Страница Категории Новостей
@@ -60,11 +60,16 @@ Route::namespace('News')->group( function(){
      Route::group(['middleware' =>'auth'], function() {
         // Редактирование Новостей
         Route::get('show/news', [PostController::class,'show'])->name('news.show');
-         Route::get('edit/news/{id}', [PostController::class,'edit'])->name('news.edit');
-         Route::post('edit/news/{id:id}', [PostController::class,'update'])->name('news.edit_post');
+        Route::get('edit/news/{id}', [PostController::class,'edit'])->name('news.edit');
+        Route::post('edit/news/{id:id}', [PostController::class,'update'])->name('news.edit_post');
 
-         Route::get('add/news', [PostController::class,'create'])->name('news.add');
-         Route::post('add/news', [PostController::class,'store'])->name('news.add_post');
+        Route::get('add/news', [PostController::class,'create'])->name('news.add');
+        Route::post('add/news', [PostController::class,'store'])->name('news.add_post');
+
+        // доп.маршрут, чтобы разрешить публикацию поста
+        Route::get('enable/news/{id}', [PostController::class,'enable'])->name('news.enable');
+        // доп.маршрут, чтобы запретить публикацию поста
+        Route::get('disable/news/{id}', [PostController::class,'disable'])->name('news.disable');
 
     });
 

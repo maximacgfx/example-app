@@ -37,7 +37,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $posts = News::select('image', 'user_id', 'excerpt', 'slug', 'published_at', 'title')
-            ->where('published_at', '<=', Carbon::now())
+            // ->where('published_at', '<=', Carbon::now())
             ->orderBy('published_at', 'desc')
             // ->paginate(config('blog.posts_per_page'));
             ->paginate(6);
@@ -47,6 +47,19 @@ class NewsController extends Controller
         //    'title' => 'Новости Hasyl Cesmesi',
         //    'posts' => $posts,
         // ];
+        return view('Template::pages.blog', [
+            'title' => 'Новости Hasyl Cesmesi',
+            'posts' => $posts,
+            'content' => ''
+        ]);
+
+        // template.pages.blog
+    }
+
+    public function newsPage(Request $request)
+    {
+        $posts = News::Published()->paginate(6);
+
         return view('Template::pages.blog', [
             'title' => 'Новости Hasyl Cesmesi',
             'posts' => $posts,

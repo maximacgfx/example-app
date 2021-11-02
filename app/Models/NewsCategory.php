@@ -11,6 +11,8 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
 class NewsCategory extends Model
 {
     use HasFactory;
+
+    
 //    use QueryCacheable;
 //    protected $cacheFor = 180; // 3 минуты
 
@@ -59,6 +61,23 @@ class NewsCategory extends Model
      */
     public function children() {
         return $this->hasMany(NewsCategory::class, 'parent_id');
+    }
+
+    /**
+     * Возвращает массив идентификаторов всех потомков категории
+     */
+    public static function descendants($id) {
+        // получаем прямых потомков категории с идентификатором $id
+        $children = self::where('parent_id', $id)->get();
+        $ids = [];
+        foreach ($children as $child) {
+            $ids[] = $child->id;
+            // для каждого прямого потомка получаем его прямых потомков
+            if ($child->children->count()) {
+                $ids = array_merge($ids, self::descendants($child->id));
+            }
+        }
+        return $ids;
     }
 
 }

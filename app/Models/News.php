@@ -35,11 +35,22 @@ class News extends Model
 
     protected $dates = ['published_at'];
 
-    protected $fillable = ['user_id',
+    /**
+     * Количество постов на странице при пагинации
+     */
+    protected $perPage = 5;
+
+    protected $fillable = [
+        'user_id',
         'published_by' ,
         'category_id' ,
         'title' ,
-        'slug' ,'image','excerpt','content','published_at'];
+        'slug' ,
+        'image',
+        'excerpt',
+        'content',
+        'published_at'];
+
 
     /**
      * Связь модели News с моделью Tag, позволяет получить
@@ -56,7 +67,7 @@ class News extends Model
      * родительскую категорию поста
      */
     public function category() {
-        return $this->hasOne(NewsCategory::class);
+        return $this->belongsTo(NewsCategory::class);
     }
 
     /**
@@ -83,6 +94,61 @@ class News extends Model
             ->orderBy('published_at', 'desc')
             ->take(4)
             ->get();
+    }
+
+    /**
+     * Возвращает true, если публикация разрешена
+     */
+    public function isVisible() {
+        return ! is_null($this->published_by);
+    }
+
+
+
+    //-----------------------------
+
+    /**
+     * Связь модели Post с моделью User, позволяет получить
+     * администратора, который разрешил публикацию поста
+     */
+    public function editor() {
+        return $this->belongsTo(User::class, 'published_by');
+    }
+
+    /**
+     * Связь модели Post с моделью Comment, позволяет получить
+     * все комментарии к посту
+     */
+    // public function comments() {
+    //     return $this->hasMany(Comment::class);
+    // }
+
+    /**
+     * Разрешить публикацию поста блога
+     */
+    public function enable() {
+        $this->published_by = auth()->user()->id;
+        $this->update();
+    }
+
+    /**
+     * Запретить публикацию поста блога
+     */
+    public function disable() {
+        $this->published_by = null;
+        $this->update();
+    }
+
+
+
+    /**
+     * Выбирать из БД только опубликованные посты
+     */
+    public function scopePublished($query) {
+        return $query->whereNotNull('published_by')
+        ->where('published_at', '<=', Carbon::now())
+        ->orderBy('published_at', 'desc')
+        ->select('image', 'user_id', 'excerpt', 'slug', 'published_at', 'title');
     }
 
 }

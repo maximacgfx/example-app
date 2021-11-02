@@ -81,7 +81,7 @@ class PostController extends Controller
      */
     public function show(News $news)
     {
-        $posts = $news::select( 'id','user_id', 'created_at', 'title')
+        $posts = $news::select( 'id','user_id', 'created_at', 'title','published_by')
         // // ->where('published_at', '<=', Carbon::now())
         // ->orderBy('published_at', 'desc')
         // // ->paginate(config('blog.posts_per_page'));
@@ -146,14 +146,11 @@ class PostController extends Controller
         $post->image = $data['image'];
         $post->content = $data['content'];
         $post->excerpt = $data['excerpt'];
-
         $post->slug = Str::slug(substr($data['title'], 0, 50));
 
         //        dd(Str::slug(substr($data['title'], 0, 50)));
 
         $res = $user->posts()->save($post);
-
-
 
         return redirect()->route('news.edit_post', ['id' => $post->id])->with('message', 'Материал обновлен');
       
@@ -168,5 +165,24 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Разрешить публикацию поста блога
+     */
+    public function enable(News $id) {
+        $id->enable();
+        $title = $id->title;
+        return back()->with('message', 'Пост "' .$title .'"  опубликован.');
+    }
+
+    /**
+     * Запретить публикацию поста блога
+     */
+    public function disable(News $id) {
+
+        $title = $id->title;
+        $id->disable();
+        return back()->with('message', 'Пост "' .$title .'"  снят с публикации.');
     }
 }
