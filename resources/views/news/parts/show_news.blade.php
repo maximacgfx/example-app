@@ -4,6 +4,7 @@
         <div class="">
             <h2>{{ $title}}</h2>
         </div>
+
         @include('news.parts.alerts-sessions')
         @if ($posts->count())
         <table class="table table-bordered">
@@ -29,7 +30,7 @@
                     {{-- </td> --}}
                     <td>
                         {{-- @perm('manage-posts') --}}
-                            <a href="{{ route('news') }}"
+                            <a href="{{ route('news.preview', ['id' => $post->id]) }}"
                             title="Предварительный просмотр">
                                 <i class="fas fa-eye"></i>
                             </a>
@@ -77,6 +78,21 @@
 </div>
 <div class="col-lg-3">
     @include('news.sidebar')
+    @if ($roots->count())
+    <div class="blog-widget mb-4">
+    <h6 class="mb-3 mt-3">Родительские категории</h6>
+    <div class="list-group list-group-right-arrow mt-3">
+    
+    @foreach ($roots as $root)
+
+            <a href="{{ route('news.cat', ['category' => $root->slug]) }}"
+                    class="list-group-item bg-light"
+                    > {{ $root->name }}</a>
+
+    @endforeach
+
+    </div></div>
+    @endif
     {{-- @include('template.widgets.latest-post') --}}
 </div>
 

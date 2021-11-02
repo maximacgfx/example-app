@@ -67,6 +67,8 @@ Route::group(['middleware' =>'auth'], function() {
         Route::post('add/news', [PostController::class,'store'])->name('news.add_post');
         // Удаление Поста
         Route::delete('delete/news/{id}', [PostController::class,'destroy'])->name('news.delete_post');
+        // Preview Поста
+        Route::get('preview/news/{post}', [PostController::class,'preview'])->name('news.preview');
 
         // доп.маршрут, чтобы разрешить публикацию поста
         Route::get('enable/news/{id}', [PostController::class,'enable'])->name('news.enable');

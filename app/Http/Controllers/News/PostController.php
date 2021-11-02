@@ -5,6 +5,7 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\NewsCategory;
 use Auth;
 use Gate;
 use Str;
@@ -16,9 +17,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function preview(News $post)
+    {   
+        // dd($post);
+        // сигнализирует о том, что это режим пред.просмотра
+        session()->flash('preview', 'yes');
+        
+        return view('news.parts.preview', ['title' => 'Редактирование материала', 'post' => $post]);
     }
 
     /**
@@ -80,7 +85,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(News $news)
-    {
+    {   
+        $roots = NewsCategory::where('parent_id', 0)->get();
         $posts = $news::select( 'id','user_id', 'created_at', 'title','published_by')
         // // ->where('published_at', '<=', Carbon::now())
         // ->orderBy('published_at', 'desc')
@@ -89,7 +95,11 @@ class PostController extends Controller
         // $posts = $news::all();
         // dd($posts);
 
-        return view('news.parts.show_news' ,['title' => 'Все посты блога', 'posts' => $posts]);
+        return view('news.parts.show_news' ,[
+            'title' => 'Все посты блога',
+            'posts' => $posts,
+            'roots' => $roots
+            ]);
     }
 
     /**
