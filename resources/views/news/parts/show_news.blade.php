@@ -29,7 +29,7 @@
                     {{-- </td> --}}
                     <td>
                         {{-- @perm('manage-posts') --}}
-                            <a href="{{ route('help', ['post' => $post->id]) }}"
+                            <a href="{{ route('news') }}"
                             title="Предварительный просмотр">
                                 <i class="fas fa-eye"></i>
                             </a>
@@ -59,10 +59,10 @@
                     </td>
                     <td>
                         {{-- @perm('delete-post') --}}
-                            <form action="{{ route('help', ['post' =>1]) }}"
+                            <form action="{{ route('news.delete_post', ['id' => $post->id]) }}"
                                 method="post" onsubmit="return confirm('Удалить этот пост?')">
                                 @csrf
-                                {{-- // @ method('DELETE') --}}
+                                @method('DELETE')
                                 <button type="submit" class="m-0 p-0 border-0 bg-transparent">
                                     <i class="far fa-trash-alt text-danger"></i>
                                 </button>

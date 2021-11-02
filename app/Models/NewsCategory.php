@@ -20,11 +20,12 @@ class NewsCategory extends Model
 
     protected $table ='news_categories';
 
-//    protected $fillable = ['parent_id',
-//        'name' ,
-//        'slug' ,
-//        'image' ,
-//        'content' ];
+   protected $fillable = [
+       'parent_id',
+       'name' ,
+       'slug' ,
+       'image' ,
+       'content' ];
 
 //    public function tags() {
 //        return $this->belongsToMany(NewsTag::class);

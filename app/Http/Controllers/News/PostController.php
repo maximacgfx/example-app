@@ -66,7 +66,7 @@ class PostController extends Controller
             'excerpt' => $data['excerpt'],
             'published_at' => now('Europe/London'),
             'published_by' => rand(1, 10),
-            'category_id' => rand(1, 10),
+            'category_id' => $data['parent_id'],
         ]);
 
 
@@ -116,7 +116,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //        dd($request);
+            //    dd($request);
         $this->validate($request, [
             'title' => 'required'
         ]);
@@ -125,7 +125,7 @@ class PostController extends Controller
 
         $data = $request->except('_token');
 
-        //        dd($data);
+            //    dd($data);
 
         $post = News::find($data['id']);
 
@@ -146,6 +146,7 @@ class PostController extends Controller
         $post->image = $data['image'];
         $post->content = $data['content'];
         $post->excerpt = $data['excerpt'];
+        $post->category_id = $data['parent_id'];
         $post->slug = Str::slug(substr($data['title'], 0, 50));
 
         //        dd(Str::slug(substr($data['title'], 0, 50)));
@@ -162,9 +163,34 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(News $id)
     {
-        //
+        $id->delete();
+        return back()->with('message', 'Пост "' .$title .'"  Удален.');
+    }
+
+    /**
+     * Удаляет пост блога из базы данных
+     */
+    public function destroy(News $id) {
+
+        // dd(request()->route());
+        // dd(request()->session()->all());
+        // dd(request()->session()->get('_previous')['url']);
+        
+        $previous_url = request()->session()->get('_previous')['url'];
+        $title = $id->title;
+
+        $id->delete();
+        // пост может быть удален в режиме пред.просмотра или из панели
+        // управления, так что и редирект после удаления будет разным
+        // $route = 'admin.post.index';
+        if (session('_previous')) {
+            $route = 'news.show';
+        }
+        return redirect($previous_url)
+            // ->route($route)
+            ->with('message', 'Пост "' .$title .'"  успешно удален');
     }
 
     /**

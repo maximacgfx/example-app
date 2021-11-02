@@ -32,7 +32,7 @@ class News extends Model
 //    protected $cacheFor = 180; // 3 минуты
 
     protected  $table ='news';
-
+    
     protected $dates = ['published_at'];
 
     /**

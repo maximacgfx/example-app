@@ -4,38 +4,74 @@ namespace App\Http\Controllers\News;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\NewsCategory;
+use Str;
 
 class CategoryController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
+     * Показывает список всех категорий
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $items = NewsCategory::all();
+        return view('news.parts.show_category',['title' => 'Все Категории.', 'items' => $items]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Показывает форму для создания категории
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('news.parts.create_category',['title' => 'Добавление новой категории.'] );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Сохранение только что созданной категории.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        // dd($request);
+
+
+        $category = new NewsCategory;
+
+        $this->validate($request,[
+            'name'=>'required',
+            // 'content' =>'required'
+        ]);
+
+
+        $data = $request->all();
+
+        $res = $category->create([
+            'name' => $data['name'],
+            'slug' => Str::slug(substr($data['name'],0,30)),
+            'parent_id' =>$data['parent_id'],
+            // 'image' => $data['image'],
+            'content' => $data['content'],
+            
+            // 'title' => $data['title'],
+            // 'slug' => Str::slug(substr($data['title'],0,30)),
+            // 'excerpt' => $data['excerpt'],
+            // 'published_at' => now('Europe/London'),
+            // 'published_by' => rand(1, 10),
+            // 'category_id' => rand(1, 10),
+        ]);
+        ////////////////////////////
+        // dd($res);
+        // NewsCategory::create($request->all());
+        return redirect()
+            ->route('news.cat.show')
+            ->with('message', 'Новая категория успешно создана');
     }
 
     /**
@@ -50,14 +86,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Показывает форму для редактирования категории
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(NewsCategory $category)
     {
-        //
+        // dd($category);
+        
+        return view('news.parts.edit_category',
+        ['title' => 'Редактирование категории.' , 'category' => $category] );
+        
     }
 
     /**
@@ -67,9 +107,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    /**
+     * Обновляет категорию блога в базе данных
+     */
+    public function update(Request $request, NewsCategory $category) {
+        $category->update($request->all());
+        return redirect()
+            ->route('news.cat.show')
+            ->with('message', 'Категория была оновлена.');
     }
 
     /**
@@ -78,8 +123,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    /**
+     * Удаляет категорию блога
+     */
+    public function destroy(NewsCategory $category) {
+        if ($category->children->count()) {
+            $errors[] = 'Нельзя удалить категорию с дочерними категориями';
+        }
+        if ($category->news->count()) {
+            $errors[] = 'Нельзя удалить категорию, которая содержит посты';
+        }
+        if (!empty($errors)) {
+            return back()->withErrors($errors);
+        }
+        $category->delete();
+        return redirect()
+            ->route('news.cat.show')
+            ->with('message', 'Категория "' .$category->name .'" успешно удалена');
     }
 }

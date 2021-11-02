@@ -1,6 +1,4 @@
-@extends('template.index')
-@section('head')
-    <title>{{ $title}}</title>
+@extends('news.index')
 @section('header')
     @include('template.parts.header')
 @endsection

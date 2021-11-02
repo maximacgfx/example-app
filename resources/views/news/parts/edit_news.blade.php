@@ -20,6 +20,15 @@
                 <input type="text" class="form-control" id="image" value="{{ $post->image }}" name="image" placeholder="img">
             </div>
             <div class="form-group">
+                    @php
+                        $parent_id = old('parent_id') ?? $category->parent_id ?? 0;
+                    @endphp
+                    <select name="parent_id" class="form-control" title="Родитель">
+                        <option value="0">Без родителя</option>
+                        @include('news.parts.parents', ['level' => -1, 'parent' => 0])
+                    </select>
+            </div>
+            <div class="form-group">
                 <label for="content">Content <b>*</b></label>
                 <textarea class="form-control" id="content" name="content" rows="8">{{ $post->content }}</textarea>
             </div>
