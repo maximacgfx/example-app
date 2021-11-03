@@ -17,13 +17,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function preview(News $post)
+    public function preview(News $id)
     {   
-        // dd($post);
+        // dd($id);
         // сигнализирует о том, что это режим пред.просмотра
         session()->flash('preview', 'yes');
         
-        return view('news.parts.preview', ['title' => 'Редактирование материала', 'post' => $post]);
+        return view('news.parts.preview2', ['title' => 'Редактирование материала', 'post' => $id]);
     }
 
     /**
@@ -44,7 +44,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // dd($request)
         $article = new News;
+
 
         /*if(Gate::denies('add',$article)) {
             return redirect()->back()->with(['message'=>'У Вас нет прав']);
@@ -108,11 +111,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $id)
     {
-        $post = News::whereId($id)->firstOrFail();
-
-        return view('news.parts.edit_news', ['title' => 'Редактирование материала', 'post' => $post]);
+        // $post = News::whereId($id)->firstOrFail();
+        // dd($id);
+        return view('news.parts.edit_news', ['title' => 'Редактирование материала', 'post' => $id]);
     
               
     }
@@ -152,11 +155,17 @@ class PostController extends Controller
         //            return redirect()->back()->with('message','Материал обновлен');
         //        }
 
+
+   
         $post->title = $data['title'];
         $post->image = $data['image'];
         $post->content = $data['content'];
         $post->excerpt = $data['excerpt'];
-        $post->category_id = $data['parent_id'];
+        if($data['parent_id']){
+            // dd($data['parent_id']);
+            $post->category_id = $data['parent_id'];
+        }
+        
         $post->slug = Str::slug(substr($data['title'], 0, 50));
 
         //        dd(Str::slug(substr($data['title'], 0, 50)));

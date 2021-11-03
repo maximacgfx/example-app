@@ -21,7 +21,8 @@
             </div>
             <div class="form-group">
                     @php
-                        $parent_id = old('parent_id') ?? $category->parent_id ?? 0;
+                        $parent_id = old('parent_id') ?? $post->category_id ?? 0;
+                        // $parent_id = $post->category_id;
                     @endphp
                     <select name="parent_id" class="form-control" title="Родитель">
                         <option value="0">Без родителя</option>
@@ -38,11 +39,12 @@
                 
             </div>
             <p>Звездочкой ( <b>*</b> ) помечены поля обязательные для заполнения.</p>
-            <button type="submit" class="btn btn-primary"
+            <button type="submit" class="btn btn-primary mb-3"
                     onclick="event.preventDefault();
                                 document.getElementById('edit-form').submit();"
             >Обновить</button>
-        </form>       
+        </form>
+        @include('news.parts.preview_footer')       
 </div>
 <div class="col-lg-4">
     @include('news.sidebar')

@@ -22,7 +22,7 @@ use App\Http\Controllers\Memcached\MemcachedController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('template.pages.home');
 });
 
 
@@ -68,12 +68,15 @@ Route::group(['middleware' =>'auth'], function() {
         // Удаление Поста
         Route::delete('delete/news/{id}', [PostController::class,'destroy'])->name('news.delete_post');
         // Preview Поста
-        Route::get('preview/news/{post}', [PostController::class,'preview'])->name('news.preview');
+        Route::get('preview/news/{id}', [PostController::class,'preview'])->name('news.preview');
 
         // доп.маршрут, чтобы разрешить публикацию поста
         Route::get('enable/news/{id}', [PostController::class,'enable'])->name('news.enable');
         // доп.маршрут, чтобы запретить публикацию поста
         Route::get('disable/news/{id}', [PostController::class,'disable'])->name('news.disable');
+
+        
+
         
         // Маршруты для работы с категориями.
         Route::get('show/category', [CategoryController::class,'index'])->name('news.cat.show');

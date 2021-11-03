@@ -15,7 +15,9 @@
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-lg-8">
-
+                        @auth
+                        @include('news.parts.alerts-sessions')
+                        @endif
                         @include('template.sections.blog-content')
                         @include('pagination.page')
 

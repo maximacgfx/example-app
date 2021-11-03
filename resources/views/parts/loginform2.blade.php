@@ -29,9 +29,9 @@
         </div>
     </div>
 
-    <div class="form-group ro mb-2w">
+    <div class="form-group ro mb-2">
         <div class="col-md-6 offset-md-4">
-            <div class="form-check">
+            <div class="form-check" style="padding-left: 2em;">
                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                 <label class="form-check-label" for="remember">
@@ -41,13 +41,13 @@
         </div>
     </div>
 
-    <div class="form-group row mb-0">
+    <div class="form-group row mb-2 mt-2">
         <div class="col-md-8 offset-md-4">
-            <button type="submit" class="btn btn-primary">
-                {{ __('Login') }}
+            <button type="submit" class="btn btn-primary" style="min-width: 150px;">
+                {{ ' '.__('Login'). ' ' }}
             </button>
 
-            @if (Route::has('password.request'))
+            @if (Route::has('password.request!'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>

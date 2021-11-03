@@ -16,12 +16,8 @@
             @endforeach
             @endif
 </h6>
-<div class="mb-0">
-    <button class="btn btn-primary badge-pill" onclick="history.go(-1)">{{ __('menu.back') }}</button>
-    @auth
-        <a href="{{ route('news.edit', ['id' => $post->id]) }}" class="badge badge-pill badge-warning">Edit News</a>
-
-    @endif
+<div class="mb-2">
+    <button style="min-width:200px" class="btn btn-primary badge-pill" onclick="history.go(-1)">{{ __('menu.back') }}</button>
 </div>
 
 
