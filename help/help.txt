@@ -26,7 +26,40 @@ DB_CONNECTION=sqlite
 DB_DATABASE=/absolute/path/to/database.sqlite
 
 
+Laravel подсчет новостей в выбранной категории (включая подкатегории)?
+https://qna.habr.com/q/266707
+
+На скорую руку, если я правильно понял, вывод на сайт:
+
+@foreach(Categories::all() as $category)
+{{ $category->name }} <span class="badge">{{ Post_categories::where('categories_id', $category->id)->count() }}</span>
+@endif
+
+UPD
+Модель для категорий:
+
+class Categories extends Model {
+
+    public function posts()
+    {
+//Получаем множество постов, опубликованных в категории
+        return $this->hasMany('App\PostCategories', 'categories_id', 'id');
+    }
+
+}
 
 
+В контроллеле:
+public function index(){
+//Получаем коллекцию категорий, где есть посты. Есть постов в категории нет, то ее не будет в выборке.
+        $categories = Categories::has('posts')->get();
+        return view('index', compact('categories'));
+    }
 
+
+Во вьюхе:
+@foreach($categories as $category)
+{{ $category->name }} <span class="badge">{{ $category->posts->count() }}</span>
+@endif
+    
 

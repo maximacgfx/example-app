@@ -8,10 +8,11 @@
                 @endif
                 @if($level)
                     <a href="{{ route('news.cat',['category' =>$item->slug ])}}" ><span>{{ $item->name }}</span></a>
-                    <span class="badge badge-dark float-right">{{ $item->news->count() }}</span>
+                    {{-- {{ dd($item->news->where('published_at','<=',now()) )}} --}}
+                    <span class="badge badge-dark float-right">{{ $item->news->where('published_at','<=',now())->count() }}</span>
                 @else
                 <a href="{{ route('news.cat',['category' =>$item->slug ])}}" ><strong>{{ $item->name }}</strong></a>
-                <span class="badge badge-dark float-right">{{ $item->news->count() }}</span>
+                <span class="badge badge-dark float-right">{{ $item->news->where('published_at','<=',now())->count() }}</span>
                 @endif
             </td>
             <td>{{ $item->slug }}</td>

@@ -5,7 +5,7 @@
             @foreach($items as $item)
 
                     <a href="{{ route('news.cat', ['category' => $item->slug]) }}"
-                    class="list-group-item bg-light">{{ $item->name }}<span class="badge badge-dark float-right">{{ $item->news->count() }}</span></a>
+                    class="list-group-item bg-light">{{ $item->name }}<span class="badge badge-info float-right">{{ $item->news->where('published_at','<=',now())->count() }}</span></a>
 
             @endforeach
 

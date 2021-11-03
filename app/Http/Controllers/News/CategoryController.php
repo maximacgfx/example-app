@@ -115,7 +115,24 @@ class CategoryController extends Controller
      * Обновляет категорию блога в базе данных
      */
     public function update(Request $request, NewsCategory $category) {
-        $category->update($request->all());
+
+        // dd($request->session('slug'));
+        // dd($category);
+        $data = $request->all();
+
+        // 'name' => $data['name'],
+        // 'slug' => Str::slug(substr($data['name'],0,30)),
+        // 'parent_id' =>$data['parent_id'],
+        // // 'image' => $data['image'],
+        // 'content' => $data['content'],
+
+        $category->content =$data['content'];
+        $category->parent_id =$data['parent_id'];
+        $category->name =$data['name'];
+        $category->slug = Str::slug(substr($data['name'],0,30));
+        $category->update();
+        // $category->update($request->all());
+        
         return redirect()
             ->route('news.cat.show')
             ->with('message', 'Категория была оновлена.');

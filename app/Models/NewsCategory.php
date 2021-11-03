@@ -81,4 +81,9 @@ class NewsCategory extends Model
         return $ids;
     }
 
+    public function ScopePublished($query)
+    {
+        return $query->where('published_at', '<=', Carbon::now());
+    }
+
 }
