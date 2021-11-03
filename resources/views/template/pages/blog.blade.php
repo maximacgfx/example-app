@@ -19,13 +19,13 @@
                             @include('pagination.page')
                     </div>
                     <div class="col-lg-4">
+                        @include('template.widgets.search')
+                        @include('template.widgets.latest-post')
+                        @include('template.widgets.categories')
                             @include('template.widgets.popular-tags')
                             {{-- @auth
                             @include('news.sidebar')
                             @endif --}}
-                            @include('template.widgets.search')
-                            @include('template.widgets.categories')
-                            @include('template.widgets.latest-post')
                     </div>
                 </div>
             </div>

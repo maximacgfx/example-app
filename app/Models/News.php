@@ -151,4 +151,19 @@ class News extends Model
         ->select('image', 'user_id', 'excerpt', 'slug', 'published_at', 'title');
     }
 
+    /**
+     * Возвращает 10 самых популярных тегов, то есть тегов, которые
+     * связаны с наибольшим количеством постов
+     */
+    public static function popular() {
+        
+        $res = self::withCount('news')->orderByDesc('posts_count')->get();
+
+        // Debugbar::info($res);
+        // dd($res);
+        return $res;
+        
+
+    }
+
 }

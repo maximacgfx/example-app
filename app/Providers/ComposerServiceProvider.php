@@ -66,6 +66,7 @@ class ComposerServiceProvider extends ServiceProvider
             $view->with(['items' => NewsTag::popular()]);
         });
 
+
         // View::composer('admin.part.all-tags', function($view) {
         //     $view->with(['items' => Tag::all()]);
         // });

@@ -208,7 +208,7 @@ class PostController extends Controller
         
         $route = 'news.show';
         
-        // $id->delete();
+        $id->delete();
         // Todo Добавить обработку еще нескольких маршрутов
         
         // пост может быть удален в режиме пред.просмотра или из панели

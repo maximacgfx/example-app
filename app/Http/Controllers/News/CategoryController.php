@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewsCategory;
 use Str;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -17,6 +18,9 @@ class CategoryController extends Controller
      */
     public function index() {
         $items = NewsCategory::all();
+
+        // $catpostsnum = DB::table('news_categories')->join('news', 'category_id', '=', 'news_categories.id')->groupBy('news_categories.id')->select(DB::raw('count(1) AS count'))->get();
+        // dd($catpostsnum);
         return view('news.parts.show_category',['title' => 'Все Категории.', 'items' => $items]);
     }
 
