@@ -32,11 +32,12 @@
                     </div>
                     <div class="col-lg-4">
                         @auth
-                            @include('news.sidebar')
+                            {{-- @include('news.sidebar') --}}
                         @endif
                         @include('template.widgets.search')
                         @include('template.widgets.categories')
                         @include('template.widgets.latest-post')
+                        
                     </div>
                 </div>
             </div>

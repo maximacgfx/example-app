@@ -58,6 +58,8 @@ return [
     'Latest_Post' => 'Latest Post',
     'Categories' => 'Categories',
     'Search' => 'Search',
+    'PopularTags' => 'PopularTags',
+    'EditNews' => 'Edit News',
 
     // 'failed' => 'Home',
     // 'failed' => 'Home',

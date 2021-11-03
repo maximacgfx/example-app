@@ -77,7 +77,7 @@ Route::group(['middleware' =>'auth'], function() {
 
         
 
-        
+
         // Маршруты для работы с категориями.
         Route::get('show/category', [CategoryController::class,'index'])->name('news.cat.show');
         // Создание

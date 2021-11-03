@@ -25,7 +25,7 @@ return [
     'quote' => 'Request Quote',
     'address' => 'Turkmenistan, Ashgabad,<br>st. Andaliba,  70<br>(Bussiness Center),Office B07',
 
-
+    'news' => 'News',
 
 
 

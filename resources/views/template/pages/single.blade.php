@@ -16,13 +16,13 @@
                 <div class="row justify-content-between">
 
                     <div class="col-lg-8">
-                        @auth
+                        {{-- @auth
                         @include('news.parts.alerts-sessions')
-                        @endif
+                        @endif --}}
                         @include('template.sections.blog-content-single')
-                        @auth
+                        {{-- @auth
                         @include('news.parts.preview_footer')
-                        @endif
+                        @endif --}}
                         {{--                            @include('template.sections.blog-content-single-cache')--}}
                         {{-- @include('template.sections.comments') --}}
                     </div>

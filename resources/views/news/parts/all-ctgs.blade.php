@@ -7,7 +7,7 @@
                     {{ str_repeat('—', $level) }}
                 @endif
                 @if($level)
-                    <span>{{ $item->name }}</span>
+                    <a href="{{ route('news.cat',['category' =>$item->slug ])}}" ><span>{{ $item->name }}</span></a>
                 @else
                     <strong>{{ $item->name }}</strong>
                 @endif

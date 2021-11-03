@@ -19,9 +19,10 @@
                             @include('pagination.page')
                     </div>
                     <div class="col-lg-4">
-                            @auth
+                            @include('template.widgets.popular-tags')
+                            {{-- @auth
                             @include('news.sidebar')
-                            @endif
+                            @endif --}}
                             @include('template.widgets.search')
                             @include('template.widgets.categories')
                             @include('template.widgets.latest-post')

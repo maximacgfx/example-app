@@ -1,5 +1,5 @@
 <div class="blog-widget mb-4">
-    <h6 class="mb-3">Редактирование Новостей</h6>
+<h6 class="mb-3">{{ __('menu.EditNews')}}</h6>
     <div class="list-group list-group-right-arrow">
         <a href="{{ route('news.show') }}" class="list-group-item bg-light">Все посты блога</a>
         <a href="{{ route('news.cat.show')}}" class="list-group-item bg-light">Список Категорий</a>

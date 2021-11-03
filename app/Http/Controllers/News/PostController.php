@@ -184,8 +184,10 @@ class PostController extends Controller
      */
     public function delete(News $id)
     {
-        $id->delete();
-        return back()->with('message', 'Пост "' .$title .'"  Удален.');
+        // $id->delete();
+
+       
+        // return back()->with('message', 'Пост "' .$title .'"  Удален.');
     }
 
     /**
@@ -193,22 +195,34 @@ class PostController extends Controller
      */
     public function destroy(News $id) {
 
+        // dd(request());
         // dd(request()->route());
         // dd(request()->session()->all());
+
         // dd(request()->session()->get('_previous')['url']);
         
-        $previous_url = request()->session()->get('_previous')['url'];
-        $title = $id->title;
+        // $route = request()->session()->get('_previous')['url'];
 
-        $id->delete();
+
+        $title = $id->title;
+        
+        $route = 'news.show';
+        
+        // $id->delete();
+        // Todo Добавить обработку еще нескольких маршрутов
+        
         // пост может быть удален в режиме пред.просмотра или из панели
         // управления, так что и редирект после удаления будет разным
         // $route = 'admin.post.index';
-        if (session('_previous')) {
-            $route = 'news.show';
-        }
-        return redirect($previous_url)
-            // ->route($route)
+    
+        
+        // if (session('preview')) {
+        //     $route = 'news.show';
+        //     return redirect()->route($route)
+        //     ->with('message', 'Пост "' .$title .'"  успешно удален');
+        // }
+        
+        return redirect()->route($route)
             ->with('message', 'Пост "' .$title .'"  успешно удален');
     }
 

@@ -61,7 +61,7 @@ class NewsController extends Controller
         $posts = News::Published()->paginate(6);
 
         return view('Template::pages.blog', [
-            'title' => 'Новости Hasyl Cesmesi',
+            'title' => __('homepage.news').' Hasyl Cesmesi',
             'posts' => $posts,
             'content' => ''
         ]);
@@ -76,6 +76,8 @@ class NewsController extends Controller
      */
     public function tags(NewsTag $tag)
     {
+        // dd($tag);
+
         $posts = $tag->news()->where('published_at', '<=', Carbon::now())
             ->orderBy('published_at', 'desc')
             ->paginate(3);

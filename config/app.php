@@ -178,6 +178,9 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
 
+        // https://github.com/barryvdh/laravel-debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*
@@ -229,8 +232,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        // Custom Classes
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
