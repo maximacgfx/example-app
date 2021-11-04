@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\SiteFormMail;
+use App\jobs\SendMailFromWebForm;
 use Mail;
 
 class FormController extends Controller
@@ -41,26 +42,28 @@ class FormController extends Controller
 
         // dd($data) ;
         
-        Mail::send('mails.site_form2', ['data' => $data], function($message) use($data) {
-            /*
-                Определить переменные:
-                    Кому отправлять, допустим отдел по связям.
-                    Копию в ящик админа сайта лдя контроля.
-            */             
-            $mail_admin = 'idexfactor@yandex.ru';
-            $admin_name = 'Index Factor';
+        // Mail::send('mail.site_form2', ['data' => $data], function($message) use($data) {
+        //     /*
+        //         Определить переменные:
+        //             Кому отправлять, допустим отдел по связям.
+        //             Копию в ящик админа сайта лдя контроля.
+        //     */             
+        //     $mail_admin = 'idexfactor@yandex.ru';
+        //     $admin_name = 'Index Factor';
             
-            $mail_depatment = 'sales@hasyl.com';
-            $depatment_name = 'sales@hasyl.com';
+        //     $mail_depatment = 'sales@hasyl.com';
+        //     $depatment_name = 'sales@hasyl.com';
 
-            $message->from( $data['email'], $data['name']);
-            $message->to( $mail_depatment, $depatment_name);
-            $message->cc($mail_admin, $admin_name);
-            $message->subject('Request for Call. Site Contact Form.');
-            });
+        //     $message->from( $data['email'], $data['name']);
+        //     $message->to( $mail_depatment, $depatment_name);
+        //     $message->cc($mail_admin, $admin_name);
+        //     $message->subject('Request for Call. Site Contact Form.');
+        //     });
 
 
         // dd($result);
+
+        SendMailFromWebForm::dispatch()->onQueue('contatc_form');
 
         
         return redirect()->route('contacts')->with('message','Email is send.');
