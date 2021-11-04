@@ -29,5 +29,7 @@ https://www.internet-technologies.ru/articles/primer-ispolzovaniya-planirovschik
 Создание компонента Vue.js в Laravel
 https://www.internet-technologies.ru/articles/sozdanie-komponenta-vue-js-v-laravel.html
 
+How to Generate PDF File in Laravel 8 Using DOM PDF
+https://programmingfields.com/how-to-generate-pdf-in-laravel-8-using-dompdf/
 
 

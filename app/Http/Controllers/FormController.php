@@ -25,7 +25,8 @@ class FormController extends Controller
 
                 ],
             $valid_mess);
-            
+        
+
         // $data = $request->except('_token');
         $data = $request->all();
 
@@ -40,24 +41,30 @@ class FormController extends Controller
 
         // dd($data) ;
         
-        $res = Mail::send('mails.site_form2', ['data' => $data], function($message) use($data) {
+        Mail::send('mails.site_form2', ['data' => $data], function($message) use($data) {
+            /*
+                Определить переменные:
+                    Кому отправлять, допустим отдел по связям.
+                    Копию в ящик админа сайта лдя контроля.
+            */             
+            $mail_admin = 'idexfactor@yandex.ru';
+            $admin_name = 'Index Factor';
             
+            $mail_depatment = 'sales@hasyl.com';
+            $depatment_name = 'sales@hasyl.com';
 
-            $mail_admin = env('MAIL_FROM_ADDRESS','idexfactor@yandex.ru');
-            
-            $mail_admin_name = env('MAIL_FROM_NAME','Index Factor');
-            
             $message->from( $data['email'], $data['name']);
-            $message->to($mail_admin, $mail_admin_name);
+            $message->to( $mail_depatment, $depatment_name);
+            $message->cc($mail_admin, $admin_name);
             $message->subject('Request for Call. Site Contact Form.');
-            
             });
 
-        if ( $res){
-            return redirect()
-                    ->route('contacts')
-                    ->with('status','Email is send.');
-        }
+
+        // dd($result);
+
+        
+        return redirect()->route('contacts')->with('message','Email is send.');
+
 
             // Mail::send('Html.view', $data, function ($message) {
             //     $message->from('john@johndoe.com', 'John Doe');
@@ -99,5 +106,8 @@ https://shpaginkirill.medium.com/вменяемая-инструкция-к-phpm
 
 Как использовать smtp.yandex.ru в laravel?
 https://qna.habr.com/q/253288
+
+Swift Mailer: A feature-rich PHP Mailer
+https://swiftmailer.symfony.com/docs/introduction.html
 
 */

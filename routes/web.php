@@ -157,12 +157,12 @@ Route::group([],function () {
     Route::get('/single', function () {
         return view('template.pages.single');})->name('single');
 
-    Route::post('/contacts',[FormController::class ,'sendmail'])->name('contacts');
-    
-    // Маршрут обработки Контакт Формы.
+        
+        // Маршрут обработки Контакт Формы.
     Route::get('/contacts', function () {
-        return view('template.pages.contacts');})->name('contacts');
-
+            return view('template.pages.contacts');})->name('contacts');
+            
+    Route::post('/contacts',[FormController::class ,'sendmail'])->name('contacts');
 
 }
 

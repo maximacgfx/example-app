@@ -25,3 +25,13 @@ class CustomerController extends Controller
         return view('layouts.customers', compact('data'));
     }
 }
+
+
+/**
+ *  https://programmingfields.com/how-to-generate-pdf-in-laravel-8-using-dompdf/
+ *  
+ * 
+ * 
+ * 
+ */
+
