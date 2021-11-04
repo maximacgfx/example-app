@@ -19,7 +19,7 @@ return [
         'telescope*',
         'horizon*',
         'admin/customers',
-        'contacts',
+        // 'contacts',
         'home',
         'about',
         'services',

@@ -1,0 +1,33 @@
+
+40 лучших инструментов и ресурсов Laravel
+https://vc.ru/services/87482-40-luchshih-instrumentov-i-resursov-laravel
+
+https://www.internet-technologies.ru/articles/ruk-po-laravel-8-kak-sozdat-pervoe-prilozhenie.html
+Руководство по Laravel 8 для начинающих: как создать своё первое приложение
+
+Руководство по ролям и правам пользователей в Laravel 8
+https://www.internet-technologies.ru/articles/rukov-po-rolyam-i-pravam-polzovateley-v-laravel-8.html
+
+15 самых важных методов коллекций Laravel: обзор и примеры
+https://www.internet-technologies.ru/articles/15-samyh-vazhnyh-metodov-kollekciy-laravel.html
+
+Маршрутизация в Laravel 8: как это делать правильно
+https://www.internet-technologies.ru/articles/marshrutizaciya-v-laravel-8-kak-eto-delat-pravilno.html
+
+
+Интеграция Bootstrap шаблона в Laravel приложение
+https://www.internet-technologies.ru/articles/integraciya-bootstrap-shablona-v-laravel.html
+
+
+Простой пример отправки формы в Laravel через AJAX jQuery
+https://www.internet-technologies.ru/articles/primer-otpravki-formy-v-laravel-cherez-ajax-jquery.html
+
+Пример использования планировщика Laravel 8 для выполнения Cron заданий
+https://www.internet-technologies.ru/articles/primer-ispolzovaniya-planirovschika-laravel-8.html
+
+
+Создание компонента Vue.js в Laravel
+https://www.internet-technologies.ru/articles/sozdanie-komponenta-vue-js-v-laravel.html
+
+
+

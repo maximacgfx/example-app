@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\News\NewsController;
 use \App\Http\Controllers\News\PostController;
+use App\Http\Controllers\FormController;
 use \App\Http\Controllers\News\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\User\IndexController;
@@ -97,34 +98,33 @@ Route::group(['middleware' =>'auth'], function() {
 });
 
 
-
-// Как сгенерировать pdf в Laravel
-//https://maxyc.ru/programming/laravel-pdf-generation/
-Route::get('admin/customers',[CustomerController::class, 'index']);
-
-
-/*
- * Личный кабинет пользователя
- */
-Route::group([
-    'as' => 'user.', // имя маршрута, например user.index
-    'prefix' => 'user', // префикс маршрута, например user/index
-    'namespace' => 'App\Http\Controllers\User', // пространство имен контроллеров
-    'middleware' => ['auth'] // один или несколько посредников
-], function () {
-    // главная страница
-    Route::get('index', 'IndexController')->name('index');
-});
+    // Как сгенерировать pdf в Laravel
+    //https://maxyc.ru/programming/laravel-pdf-generation/
+    Route::get('admin/customers',[CustomerController::class, 'index']);
 
 
-/*
- * Маршрут для Локализации приложения
- */
-Route::get('locale/{locale}', function ($locale) {
-    Session::put('locale', $locale);
+    /*
+    * Личный кабинет пользователя
+    */
+    Route::group([
+        'as' => 'user.', // имя маршрута, например user.index
+        'prefix' => 'user', // префикс маршрута, например user/index
+        'namespace' => 'App\Http\Controllers\User', // пространство имен контроллеров
+        'middleware' => ['auth'] // один или несколько посредников
+    ], function () {
+        // главная страница
+        Route::get('index', 'IndexController')->name('index');
+    });
 
-    return redirect()->back();
-})->name('locale');
+
+    /*
+    * Маршрут для Локализации приложения
+    */
+    Route::get('locale/{locale}', function ($locale) {
+        Session::put('locale', $locale);
+
+        return redirect()->back();
+    })->name('locale');
 
 /*
  * Группа маршрутов  для Статических Страниц
@@ -157,8 +157,13 @@ Route::group([],function () {
     Route::get('/single', function () {
         return view('template.pages.single');})->name('single');
 
+    Route::post('/contacts',[FormController::class ,'sendmail'])->name('contacts');
+    
+    // Маршрут обработки Контакт Формы.
     Route::get('/contacts', function () {
         return view('template.pages.contacts');})->name('contacts');
+
+
 }
 
 );
