@@ -17,6 +17,10 @@
             @endif
 </h6>
 <div class="mb-2">
+        <a href="{{ route('news.edit', ['id' => $post->id]) }}"
+                class="btn btn-primary" title="Редактировать пост">
+                 <i class="far fa-edit"></i>
+             </a>
     <button style="min-width:200px" class="btn btn-primary badge-pill" onclick="history.go(-1)">{{ __('menu.back') }}</button>
 </div>
 

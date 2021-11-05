@@ -9,6 +9,7 @@ use App\Models\NewsCategory;
 use Auth;
 use Gate;
 use Str;
+use Session;
 
 class PostController extends Controller
 {
@@ -129,14 +130,52 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-            //    dd($request);
+        
+        $data = $request->except('_token');
+
         $this->validate($request, [
             'title' => 'required'
         ]);
+        
+        //Есть ли заругжаемый файл? 
+        if ($request->hasFile('image')) {
+            // Загрузка успешна ?   
+            
+            if( $request->file('image')->isValid() ) {
+                
+                $file = $request->file('image');
+
+                $data['image'] = $file->getClientOriginalName();
+
+                // Сделать ограничение на длинну имени файла Str::($data['image'] );
+
+                $file->move(public_path().'/assets/img/blog', $data['image'] );
+                /*
+                $file_name = $file->getClientOriginalName();
+                $mime_type = $file->getClientMimeType();
+                $extension = $file->getClientOriginalExtension();
+                */
+
+            }else{
+                $file = $request->file('image');
+                // Передать сообщение об ошибке.
+                $error = $file->getError();
+                $error_message =  $file->getErrorMessage();
+                Session::flash('errors','Ошибка передачи данных файла.');
+            }
+
+        }
+
+            
+
+        
+            // $file_name =$request->
+            // $file->move(public_path() . '/path','filename.img');
+        
 
         $user = Auth::user();
 
-        $data = $request->except('_token');
+        
 
             //    dd($data);
 

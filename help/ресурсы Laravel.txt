@@ -43,4 +43,18 @@ Mandrill всё? Как я искал замену и нашел 2 прекра�
 https://habr.com/ru/post/280634/    
 https://www.mailgun.com/
 
+Загрузка изображения в Laravel
+https://webstool.ru/zagruzka-izobrazheniya-v-laravel.html
+
+Блог на Laravel 7, часть 14. Валидация данных и права доступа при загрузке изображений
+https://tokmakov.msk.ru/blog/item/610
+
+Laravel. Отправка письма из приложения
+https://tokmakov.msk.ru/blog/item/587
+
+Создание и отправка email в Laravel с использованием Markdown
+https://dvsemenov.ru/sozdanie-i-otpravka-email-v-laravel-s-ispolzovaniem-markdown/
+
+Загрузка файлов в laravel
+https://ru.stackoverflow.com/questions/563434/Загрузка-файлов-в-laravel
 

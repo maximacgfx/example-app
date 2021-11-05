@@ -7,18 +7,31 @@
             <h2>{{ $title}}</h2>
         </div>
         @include('news.parts.alerts-sessions')
-        <form id="edit-form" method="post" action="{{ route('news.add_post') }}">
+        <form id="edit-form" method="post" enctype="multipart/form-data" action="{{ route('news.add_post') }}">
             <style>
             #edit-form b{color: brown}
             </style>
+
+
+
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
+            <input type="file" class="filestyle" data-buttonText="Добавить Изображение">
+            </div>
+            
+                <div class="form-group">
                 <label for="title">Заголовок <b>*</b></label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="Заголовок">
             </div>
             <div class="form-group">
-                <label for="image">Изображение</label>
-                <input type="text" class="form-control" id="image" value="{{ old('image') }}" name="image" placeholder="img">
+                <input type="file" 
+                data-btnClass="btn-primary" 
+                class="filestyle" 
+                data-buttonBefore="true"
+                iconName="fa fa-folder"
+                {{-- data-placeholder="{{ $post->image }}" --}}
+                buttonName="btn btn-info"
+                data-buttonText="Загрузить Изображение">
             </div>
             <div class="form-group">
                     @php
@@ -54,6 +67,7 @@
 
 @push('addscript')
 <script src="{{ asset('assets/vendors/ckeditor/ckeditor.js')}}"></script>
+<script src="{{ asset('assets/js/bootstrap-filestyle.min.js')}} "> </script>
 <script>
         // Replace the <textarea id="editor1"> with a CKEditor 4
         // instance, using default configuration.
