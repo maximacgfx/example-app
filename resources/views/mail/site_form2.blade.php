@@ -10,3 +10,21 @@
     <p>Thank you</p>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $data['title']}}</title>
+    
+</head>
+<body>    
+    
+    <p></p>
+    <p>{{$data['name'] }} </p>
+    <p>{{$data['email'] }} </p>
+    <p>{{$data['message'] }} </p>
+    <br>
+    <p>With respect</p>
+    {{-- {{$data['sender_name'] }}  --}}
+</body>
+</html>

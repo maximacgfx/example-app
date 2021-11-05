@@ -52,3 +52,13 @@
 </div>
 
 @endsection
+
+
+@push('addscript')
+<script src="{{ asset('assets/vendors/ckeditor/ckeditor.js')}}"></script>
+<script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
+@endpush

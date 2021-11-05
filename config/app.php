@@ -68,8 +68,8 @@ return [
     | https://techstream.org/Web-Development/PHP/Change-Time-Zone-in-PHP
     */
 
-    // 'timezone' => 'Asia/Ashgabat',
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ashgabat',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------

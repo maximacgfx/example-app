@@ -10,21 +10,22 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Mail;
 use App\Mail\TestMail;
+use App\Mail\SiteFormMail;
 class SendMailFromWebForm implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-
+    public $data;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-
-
+        // dd($data);
+        $this->data = $data;
     }
 
     /**
@@ -34,16 +35,21 @@ class SendMailFromWebForm implements ShouldQueue
      */
     public function handle()
     {   
+        // $admin_mail='indefactor@yandex.ru';
 
+        Mail::send(new SiteFormMail($this->data));
+        // to($admin_mail)->
+                // ->from('noreplay@admin.com' ,'Mail Service');
+/*        
         // dd($data);
 
         // dd();
         // Mail::send('mail.site_form2', ['data' => $data], function($message) use($data) {
-        //     /*
+        //     
         //         Определить переменные:
         //             Кому отправлять, допустим отдел по связям.
         //             Копию в ящик админа сайта лдя контроля.
-        //     */             
+        //                
         //     $mail_admin = 'idexfactor@yandex.ru';
         //     $admin_name = 'Index Factor';
             
@@ -69,11 +75,8 @@ class SendMailFromWebForm implements ShouldQueue
             //     $message->attach('pathToFile');
             // 
 
-        // sleep(10);
+*/        
         
-        $admin_mail='indefactor@yandex.ru';
-
-        Mail::to($admin_mail)->send(new TestMail(),[] )->from('noreplay@admin.com');
     }
 }
 

@@ -1,4 +1,6 @@
 @extends('news.post')
+
+{{-- Добавить через стек js  библиотеку CK Editor --}}
 @section('crud-forms')
 <div class="col-lg-8">
         <div class="">
@@ -22,17 +24,18 @@
                     @php
                         $parent_id = old('parent_id') ?? $category->parent_id ?? 0;
                     @endphp
+                    <label for="parent_id">Категория Новостей <b>*</b></label>
                     <select name="parent_id" class="form-control" title="Родитель">
-                        <option value="0">Без родителя</option>
+                        <option value="0">Без Категории</option>
                         @include('news.parts.parents', ['level' => -1, 'parent' => 0])
                     </select>
             </div>
             <div class="form-group">
-                <label for="content">Content <b>*</b></label>
-                <textarea class="form-control" id="content" name="content" rows="8" placeholder="Content" >{{ old('content') }}</textarea>
+                <label for="content">Содержание <b>*</b></label>
+                <textarea class="form-control" id="editor" name="content" rows="8" placeholder="Content" >{{ old('content') }}</textarea>
             </div>
             <div class="form-group">
-                <label for="excerpt">Excerpt</label>
+                <label for="excerpt">Анос статьи. (Выводиться на главной странице)</label>
                 <textarea class="form-control" id="excerpt" name="excerpt" rows="5"placeholder="Excerpt" >{{ old('excerpt') }}</textarea>
             </div>
             <p>Звездочкой ( <b>*</b> ) помечены поля обязательные для заполнения.</p>
@@ -48,3 +51,12 @@
     </div>
 
 @endsection
+
+@push('addscript')
+<script src="{{ asset('assets/vendors/ckeditor/ckeditor.js')}}"></script>
+<script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
+@endpush

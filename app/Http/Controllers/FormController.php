@@ -11,8 +11,6 @@ class FormController extends Controller
 { 
     public function sendmail(Request $request)
     {
-            // dd($request->except('_token'));
-
         $valid_mess = [
                 'required'=>'Поле :attribute обязательно для заполнения.',
                 'email'=>'Поле :attribute должно соответствовать адресу.'
@@ -27,15 +25,19 @@ class FormController extends Controller
                 ],
             $valid_mess);
         
+        $data = $request->except('_token');
+        
+        // Добавляем данные для передачи в класс письма.
+        $data['title'] = 'Сообщение из формы.'; 
+        $data['body'] = 'This is for testing email using smtp.'; 
+            
+         // отправить письмо через Диспетчер Очереди       
+        // SendMailFromWebForm::dispatch($data)->onQueue('default');
 
-        // $data = $request->except('_token');
-        $data = $request->all();
-
-
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
+        // отправить письмо обычным способом.
+        Mail::send(new SiteFormMail($data));
+        
+        return redirect()->route('contacts')->with('message','Email is send.');
        
         // $res = Mail::to('your_receiver_email@gmail.com')->send(new SiteFormMail($details));
 
@@ -48,8 +50,8 @@ class FormController extends Controller
         //             Кому отправлять, допустим отдел по связям.
         //             Копию в ящик админа сайта лдя контроля.
         //     */             
-        //     $mail_admin = 'idexfactor@yandex.ru';
-        //     $admin_name = 'Index Factor';
+        //     $mail_admin = 'asd@yandex.ru';
+        //     $admin_name = 'Asd Sd';
             
         //     $mail_depatment = 'sales@hasyl.com';
         //     $depatment_name = 'sales@hasyl.com';
@@ -61,12 +63,9 @@ class FormController extends Controller
         //     });
 
 
-        // dd($result);
-
-        SendMailFromWebForm::dispatch()->onQueue('contatc_form');
+        // dd($data);
 
         
-        return redirect()->route('contacts')->with('message','Email is send.');
 
 
             // Mail::send('Html.view', $data, function ($message) {

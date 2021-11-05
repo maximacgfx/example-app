@@ -32,4 +32,15 @@ https://www.internet-technologies.ru/articles/sozdanie-komponenta-vue-js-v-larav
 How to Generate PDF File in Laravel 8 Using DOM PDF
 https://programmingfields.com/how-to-generate-pdf-in-laravel-8-using-dompdf/
 
+Laravel - Sending Email
+https://www.tutorialspoint.com/laravel/laravel_sending_email.htm
+
+Laravel - Ajax
+https://www.tutorialspoint.com/laravel/laravel_ajax.htm
+
+
+Mandrill всё? Как я искал замену и нашел 2 прекрасные альтернативы Мандрилу
+https://habr.com/ru/post/280634/    
+https://www.mailgun.com/
+
 

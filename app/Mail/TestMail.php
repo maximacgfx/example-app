@@ -12,7 +12,7 @@ class TestMail extends Mailable
     use Queueable, SerializesModels;
 
 
-    protected $data;
+    public $data;
 
 
     // $message->from('john@johndoe.com', 'John Doe');
@@ -32,16 +32,19 @@ class TestMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        $this->data = [
-            'sender_name' => 'John Doe',
-            'sender_email' => 'john@johndoe.com',
-            'subject' => 'Subject',
-            'recipient_name' => 'Janki Doodle',
-            'recipient_email' => 'janki@jankidoodle.com',
-            'message' => 'Hello friend!'
-        ];
+
+        $this->data = $data;
+        // $this->data = [
+        //     'sender_name' => 'John Doe',
+        //     'sender_email' => 'john@johndoe.com',
+        //     'subject' => 'Subject',
+        //     'recipient_name' => 'Janki Doodle',
+        //     'recipient_email' => 'janki@jankidoodle.com',
+        //     'message' => 'Hello friend!'
+        // ];
+
         
         // $this->data['sender_name'] = $form['name'];
         // $this->data['sender_email'] = $form['email'];
@@ -56,9 +59,15 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        
-        
-        
-        return $this->view('mail.site_form.blade', $this->data);
+               
+        // $subject = 'Письмо отправлено с Контактной формы сайта ' . env('APP_URL');
+
+
+        return $this->from( $this->data['email'],$this->data['name'])
+                    ->to('kirill.gorodnov@gmail.com','Kirill')
+                    // ->subject($subject)
+                    ->subject('Письмо отправлено с Контактной формы сайта ' . env('APP_URL'))
+                    ->bcc('indexfactor@yandex.ru','Index Factor')
+                    ->view('mail.site_form');
     }
 }

@@ -5,7 +5,7 @@
                 <a>{{ $post->published_at->format('M jS Y g:ia') }}</a>
             </div>
             <h3>{{ $post->title }}</h3>
-            <p> {{ $post->content }}</p>
+            <p>{!! $post->content !!}</p>
 </div>
 <h6 class="mb-3">{{ __('menu.tags') }}:
         @if ($post->tags->count())
